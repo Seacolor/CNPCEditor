@@ -1,0 +1,27 @@
+%Elona Custom Npc
+
+author.		"{0}"
+name.		"{1},{2}"
+race.		"{3}"
+class.		"{4}"
+filter.		"/{5}/"
+level.		"{6}"
+relation.	"{7}"
+sex.		"{8}"
+fixLv.		"{9}"
+rare.		"{10}"
+spawnType.	"{11}"
+aiCalm.		"{12}"
+aiMove.		"{13}"
+aiDist.		"{14}"
+aiHeal.		"{15}"
+aiAct.		"{16},{17},{18},{19},{20}"
+aiActSubFreq.	"{21}"
+aiActSub.	"{22},{23},{24},{25},{26}"
+meleeElem.	"{27},{28}"
+resist.		"{29}"
+bitOn.		"{30}"
+transmissivity.	"{31}"
+
+{32}
+%endTxt

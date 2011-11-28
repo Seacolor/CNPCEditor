@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<model:MainModel xmlns:fx="http://ns.adobe.com/mxml/2009"
+                       xmlns:s="library://ns.adobe.com/flex/spark"
+                       xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:model="*"
+					   xmlns:view="views.*"
+					   layout="vertical"
+					   creationComplete="binding(event)">
+	
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		@namespace mx "library://ns.adobe.com/flex/mx";
+		@namespace view "*";
+        mx|Application {
+            paddingTop: 5;
+            paddingLeft: 5;
+            paddingRight: 5;
+			paddingBottom: 5;
+        }
+	</fx:Style>
+	
+	<fx:Declarations>
+		<s:RadioButtonGroup id="inRelation" selectedValue="{npcData.relation}" />
+		<s:RadioButtonGroup id="inSex" selectedValue="{npcData.sex}" />
+		<s:RadioButtonGroup id="inFixLv" selectedValue="{npcData.fixLv}" />
+		<s:RadioButtonGroup id="inSpawnType" selectedValue="{npcData.spawnType}" />
+		<s:RadioButtonGroup id="inAiCalm" selectedValue="{npcData.aiCalm}" />
+	</fx:Declarations>
+	
+	<model:states>
+		<mx:State name="default" />
+		<mx:State name="talk"  />
+	</model:states>
+
+	<s:Panel title="カスタムNPCエディタ" width="100%" height="100%">
+		<s:layout>
+			<s:BasicLayout />
+		</s:layout>
+		<s:HGroup x="0" y="0">
+			<s:Button id="inLoad" label="設定ファイルの読み込み" click="inLoadClick(event)" />
+			<s:Button id="inWrite" label="設定ファイルの書き出し" click="inWriteClick(event)" />
+		</s:HGroup>
+		<s:TabBar id="inMainTab" change="inMainTabChange(event)" x="0" y="25" dataProvider="{TAB}" />
+        <s:Scroller width="100%" height="100%" x="0" y="50">
+            <s:Group>
+                <s:Form defaultButton="{inWrite}" includeIn="default">
+                    <s:FormHeading label="性能" />
+                    <s:FormItem label="作者" required="true">
+                        <s:TextInput id="inAuthor" text="{npcData.author}" />
+                    </s:FormItem>
+                    <s:FormItem label="英語名" required="true">
+                        <s:TextInput id="inId" text="{npcData.id}" restrict="a-zA-Z0-9_ " />
+                    </s:FormItem>
+                    <s:FormItem label="日本語名" required="true">
+                        <s:TextInput id="inName" text="{npcData.name}" />
+                    </s:FormItem>
+                    <s:FormItem label="種族" required="true">
+						<s:ComboBox id="inRace"  dataProvider="{RACE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.race}" />
+					</s:FormItem>
+                    <s:FormItem label="職業" required="true">
+						<s:ComboBox id="inClass"  dataProvider="{CLASS}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.npcClass}" />
+                    </s:FormItem>
+                    <s:FormItem id="inFilter" label="属性">
+						<s:CheckBox id="inNogenerate" label="自然生成しない"/>
+						<s:CheckBox id="inNodownload" label="ダウンロード対象にしない(召喚石の召喚候補から除外されます)"/>
+						<s:CheckBox id="inMan" label="人(奴隷商人で販売される他、護衛依頼の護衛対象に)" />
+						<s:CheckBox id="inDragon" label="ドラゴン(「竜族に対して強力な威力を発揮する」の対象に)"/>
+						<s:CheckBox id="inUndead" label="アンデッド(「不死者に対して強力な威力を発揮する」の対象に)"/>
+						<s:CheckBox id="inSlime" label="スライム"/>
+						<s:CheckBox id="inFire" label="炎(灼熱の塔に登場する他、炎召喚の対象に)"/>
+						<s:CheckBox id="inSf" label="ＳＦ"/>
+						<s:CheckBox id="inYeek" label="イーク(イーク召喚の対象)"/>
+						<s:CheckBox id="inMino" label="ミノタウロス(ミノタウロスの巣に登場)"/>
+						<s:CheckBox id="inWild" label="野生(野生召喚の対象に)"/>
+						<s:CheckBox id="inPawn" label="駒(駒召喚の対象に)"/>
+						<s:CheckBox id="inShopguard" label="傭兵(行商人の護衛として登場)"/>
+						<s:CheckBox id="inRogue" label="ごろつき(盗賊団のメンバー)"/>
+						<s:CheckBox id="inCat" label="ネコ(猫召喚の対象に)"/>
+						<s:CheckBox id="inEther" label="エーテル(終末の日に登場)"/>
+						<s:CheckBox id="inHorse" label="馬(馬屋で販売される)"/>
+					</s:FormItem>
+                    <s:FormItem label="レベル">
+						<s:NumericStepper id="inLevel" value="{npcData.level}" stepSize="1" allowValueWrap="false" maximum="9999" minimum="1" />
+                    </s:FormItem>
+                    <s:FormItem label="関係">
+						 <s:RadioButton groupName="inRelation" id="inFriend" label="友好(クエストの味方など)" value="10" />
+						 <s:RadioButton groupName="inRelation" id="inNeutral" label="中立(街にいるNPCなど)" value="0" />
+						 <s:RadioButton groupName="inRelation" id="inIndifference" label="無関心(ネフィアの中立NPCなど)" value="-1" />
+						 <s:RadioButton groupName="inRelation" id="inSemiEnemy" label="敵対一歩寸前(接触すると攻撃になるNPCなど)" value="-2" />
+						 <s:RadioButton groupName="inRelation" id="inEnemy" label="敵対" value="-3" />
+                    </s:FormItem>
+                    <s:FormItem label="性別">
+						<s:layout>
+							<s:HorizontalLayout />
+						</s:layout>
+						 <s:RadioButton groupName="inSex" id="inMaleOrFemale" label="ランダム" value="-1" />
+						 <s:RadioButton groupName="inSex" id="inMale" label="男" value="0" />
+						 <s:RadioButton groupName="inSex" id="inFemale" label="女" value="1" />
+                    </s:FormItem>
+                    <s:FormItem label="生成品質">
+						 <s:RadioButton groupName="inFixLv" id="inRandom" label="ランダム" value="0" />
+						 <s:RadioButton groupName="inFixLv" id="inBad" label="粗悪" value="1" />
+						 <s:RadioButton groupName="inFixLv" id="inGood" label="良質" value="2" />
+						 <s:RadioButton groupName="inFixLv" id="inGreat" label="高品質" value="3" />
+						 <s:RadioButton groupName="inFixLv" id="inMiracle" label="奇跡(『』付き、経験レベル25%上昇)" value="4" />
+						 <s:RadioButton groupName="inFixLv" id="inGodly" label="神器(《》付き、経験レベル66%上昇)" value="5" />
+						 <s:RadioButton groupName="inFixLv" id="inUnique" label="特別(死体・剥製・カードを100%ドロップ)" value="6" />
+                    </s:FormItem>
+                    <s:FormItem label="生成頻度">
+						 <s:NumericStepper id="inRare" value="{npcData.rare}" stepSize="5" allowValueWrap="false" snapInterval="1" maximum="100" minimum="-100"/>
+                    </s:FormItem>
+                    <s:FormItem label="生成条件">
+						 <s:RadioButton groupName="inSpawnType" label="通常" value="0" />
+						 <s:RadioButton groupName="inSpawnType" label="街" value="5" />
+                    </s:FormItem>
+                    <s:FormItem label="待機時">
+						 <s:RadioButton groupName="inAiCalm" label="放浪(多くのNPCの標準)" value="1" />
+						 <s:RadioButton groupName="inAiCalm" label="鈍感(店主など)" value="2" />
+						 <s:RadioButton groupName="inAiCalm" label="停止(きのこなど)" value="3" />
+						 <s:RadioButton groupName="inAiCalm" label="随行(グウェンなど)" value="4" />
+                    </s:FormItem>
+                    <s:FormItem label="移動確率">
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle" />
+						</s:layout>
+						<s:NumericStepper id="inAiMove" value="{npcData.aiMove}" stepSize="1" allowValueWrap="false" maximum="100" minimum="0" />
+						<s:Label text="%"/>
+                    </s:FormItem>
+                    <s:FormItem label="適正距離">
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle" />
+						</s:layout>
+						<s:Label text="ターゲットから"/>
+						<s:NumericStepper id="inAiDist" value="{npcData.aiDist}" stepSize="1" allowValueWrap="false" maximum="10" minimum="1" />
+						<s:Label text="マス"/>
+                    </s:FormItem>
+                    <s:FormItem label="瀕死時行動">
+						<s:ComboBox id="inAiHeal" dataProvider="{ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiHeal}" />
+					</s:FormItem>
+                    <s:FormItem label="基本行動">
+						<s:ComboBox id="inAiAct1" dataProvider="{ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiAct1}" />
+						<s:ComboBox id="inAiAct2" dataProvider="{ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiAct2}" />
+						<s:ComboBox id="inAiAct3" dataProvider="{ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiAct3}" />
+						<s:ComboBox id="inAiAct4" dataProvider="{ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiAct4}" />
+						<s:ComboBox id="inAiAct5" dataProvider="{ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiAct5}" />
+					</s:FormItem>
+                    <s:FormItem label="特殊行動確率">
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle" />
+						</s:layout>
+						<s:NumericStepper id="inAiActSubFreq" value="{npcData.aiActSubFreq}" stepSize="10" allowValueWrap="false" snapInterval="1" maximum="100" minimum="0" />
+						<s:Label text="%"/>
+					</s:FormItem>
+                    <s:FormItem label="特殊行動">
+						<s:ComboBox id="inAiActSub1" dataProvider="{SUB_ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiActSub1}" />
+						<s:ComboBox id="inAiActSub2" dataProvider="{SUB_ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiActSub2}" />
+						<s:ComboBox id="inAiActSub3" dataProvider="{SUB_ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiActSub3}" />
+						<s:ComboBox id="inAiActSub4" dataProvider="{SUB_ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiActSub4}" />
+						<s:ComboBox id="inAiActSub5" dataProvider="{SUB_ACTION}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.aiActSub5}" />
+					</s:FormItem>
+                    <s:FormItem label="素手攻撃">
+						<s:layout>
+							<s:HorizontalLayout verticalAlign="middle" />
+						</s:layout>
+						<s:ComboBox id="inMeleeElem" dataProvider="{ELEMENT}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.meleeElem}" />
+						<s:Label text="属性で強度は"/>
+						<s:NumericStepper id="inMeleeElemPow" value="{npcData.meleeElemPow}" stepSize="10" allowValueWrap="false" snapInterval="1" maximum="99999" minimum="0" />
+					</s:FormItem>
+                    <s:FormItem label="耐性">
+						<s:HGroup>
+							<s:ComboBox id="inRegistElem" dataProvider="{ELEMENT}" labelToItemFunction="{inputToValue}" />
+							<s:Label text="属性で強度は"/>
+							<s:ComboBox id="inRegistPow" dataProvider="{REGIST_POWER}" labelToItemFunction="{inputToValue}" labelFunction="{inRegistPowLabelFunction}" />
+							<s:Button id="inRegistAdd" label="追加" click="inRegistAddClick(event)" />
+						</s:HGroup>
+						<s:List id="inRegist" dataProvider="{npcData.regist}" width="200">
+							<s:itemRenderer>
+								<fx:Component>
+									<s:ItemRenderer>
+										<s:Button id="inRegistDelete" skinClass="skins.CloseButtonSkin" width="24" height="16" click="outerDocument.inRegistDeleteClick(event)" />
+										<s:Label x="25" text="{data.elem.label + 'に' + data.pow.label }" />
+									</s:ItemRenderer>
+								</fx:Component>
+							</s:itemRenderer>
+						</s:List>
+					</s:FormItem>
+                    <s:FormItem id="inBit" label="補正">
+						<s:layout>
+							<s:TileLayout />
+						</s:layout>
+						<s:CheckBox id="inBit5" label="浮遊" />
+						<s:CheckBox id="inBit6" label="透明" />
+						<s:CheckBox id="inBit7" label="透明な物を見る" />
+						<s:CheckBox id="inBit8" label="混乱を無効" />
+						<s:CheckBox id="inBit9" label="盲目を無効" />
+						<s:CheckBox id="inBit10" label="恐怖とそれによる逃亡を無効" />
+						<s:CheckBox id="inBit11" label="睡眠を無効" />
+						<s:CheckBox id="inBit12" label="麻痺を無効" />
+						<s:CheckBox id="inBit13" label="毒を無効" />
+						<s:CheckBox id="inBit14" label="腐った物を難なく消化する" />
+						<s:CheckBox id="inBit15" label="アイテムを盗まれなくする" />
+						<s:CheckBox id="inBit16" label="変装中" />
+						<s:CheckBox id="inBit17" label="死亡時に必ず所持金を落とす" />
+						<s:CheckBox id="inBit18" label="自爆生物" />
+						<s:CheckBox id="inBit19" label="死の宣告持ち" />
+						<s:CheckBox id="inBit20" label="連続魔法持ち" />
+						<s:CheckBox id="inBit21" label="レイハンド持ち" />
+						<s:CheckBox id="inBit22" label="適正騎乗生物" />
+						<s:CheckBox id="inBit23" label="分裂生物" />
+						<s:CheckBox id="inBit24" label="自動発動型エンチャント装備中" />
+						<s:CheckBox id="inBit25" label="非適正騎乗生物(非力すぎる)" />
+						<s:CheckBox id="inBit26" label="魔法以外の属性ダメージに強い" />
+						<s:CheckBox id="inBit27" label="分裂生物(キューブ)" />
+						<s:CheckBox id="inBit28" label="金属生物" />
+						<s:CheckBox id="inBit29" label="出血を抑える" />
+						<s:CheckBox id="inBit30" label="バッシュの発生率アップ" />
+						<s:CheckBox id="inBit31" label="地雷無効" />
+                    </s:FormItem>
+                    <s:FormItem label="透過率">
+						<s:NumericStepper id="inTransmissivity" value="{npcData.transmissivity}" stepSize="10" allowValueWrap="false" snapInterval="1" maximum="256" minimum="0" />
+                    </s:FormItem>
+                </s:Form>
+                <view:TalkForm id="inTalkForm" defaultButton="{inWrite}" includeIn="talk" width="100%" preinitialize="{inTalkForm.npcData = npcData}" />
+            </s:Group>
+        </s:Scroller>
+    </s:Panel>
+</model:MainModel>

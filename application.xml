@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<application xmlns="http://ns.adobe.com/air/application/3.0">
+  <id>CNPCEditor</id>
+  <versionNumber>1.3.2</versionNumber>
+  <filename>CNPCEditor</filename>
+  <name>
+    <text xml:lang="jp">CNPCエディタ</text>
+  </name>
+  <initialWindow>
+    <title>CNPCEditor</title>
+    <content>CNPCEditor.swf</content>
+    <systemChrome>standard</systemChrome>
+    <transparent>false</transparent>
+    <visible>true</visible>
+    <minimizable>true</minimizable>
+    <maximizable>true</maximizable>
+    <resizable>true</resizable>
+  </initialWindow>
+  <!-- 
+	More options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	-->
+  <description>
+    <text xml:lang="jp">elonaのCNPCの作成を支援するソフトウェアです。
+CNPC定義ファイルの作成・編集ができます。
+
+このアプリケーションの転載・再配布は自由です。</text>
+  </description>
+  <supportedProfiles>desktop</supportedProfiles>
+</application>
