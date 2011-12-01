@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/3.0">
   <id>CNPCEditor</id>
-  <versionNumber>1.3.2</versionNumber>
+  <versionNumber>1.4</versionNumber>
   <filename>CNPCEditor</filename>
   <name>
     <text xml:lang="jp">CNPCエディタ</text>
@@ -27,4 +27,5 @@ CNPC定義ファイルの作成・編集ができます。
 このアプリケーションの転載・再配布は自由です。</text>
   </description>
   <supportedProfiles>desktop</supportedProfiles>
+  <copyright>elona@seacolorswind.com</copyright>
 </application>

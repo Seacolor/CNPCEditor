@@ -14,7 +14,6 @@ package
 	import mx.controls.Alert;
 	import mx.controls.ColorPicker;
 	import mx.core.IVisualElement;
-	import mx.core.WindowedApplication;
 	import mx.events.CollectionEvent;
 	import mx.events.DropdownEvent;
 	import mx.events.FlexEvent;
@@ -27,6 +26,7 @@ package
 	import spark.components.RadioButtonGroup;
 	import spark.components.TextArea;
 	import spark.components.TextInput;
+	import spark.components.WindowedApplication;
 	import spark.events.IndexChangeEvent;
 	import spark.events.TextOperationEvent;
 	
