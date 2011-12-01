@@ -49,7 +49,7 @@
 		<s:TabBar id="inMainTab" change="inMainTabChange(event)" x="0" y="25" dataProvider="{TAB}" />
 		<s:HGroup x="0" y="50" width="100%" height="100%">
 			<s:VScrollBar viewport="{inMainContainer}" height="100%"/>
-            <s:Group id="inMainContainer" width="100%" height="100%" clipAndEnableScrolling="true">
+            <view:CustomScrollGroup id="inMainContainer" width="100%" height="100%" clipAndEnableScrolling="true">
                 <s:Form defaultButton="{inWrite}" includeIn="default">
                     <s:FormHeading label="性能" />
                     <s:FormItem label="作者" required="true">
@@ -228,7 +228,7 @@
                     </s:FormItem>
                 </s:Form>
                 <view:TalkForm id="inTalkForm" defaultButton="{inWrite}" includeIn="talk" width="100%" preinitialize="{inTalkForm.npcData = npcData}" />
-            </s:Group>
+            </view:CustomScrollGroup>
 		</s:HGroup>
     </s:Panel>
 </model:MainModel>
