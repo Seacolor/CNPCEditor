@@ -3,8 +3,7 @@
                xmlns:s="library://ns.adobe.com/flex/spark" 
                xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:view="views.*"
-			   creationComplete="txtBinding(event)"
-			   addedToStage="reset(event)">
+			   creationComplete="txtBinding(event)">
 	
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->

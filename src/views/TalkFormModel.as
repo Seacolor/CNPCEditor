@@ -2,6 +2,7 @@ package views
 {
 	import flash.events.Event;
 	import models.NPCData;
+	import mx.binding.utils.ChangeWatcher;
 	import mx.controls.ColorPicker;
 	import mx.events.DropdownEvent;
 	import mx.events.FlexEvent;
@@ -63,7 +64,11 @@ package views
 				if (inTxtSelector.selectedIndex == -1) return;
 				npcData.talk[inTxtSelector.selectedItem.value] = changeEvent.currentTarget.text;
 			});
-			// TODO npcData.talk を監視し、コントロールを初期化
+			// npcData.talk を監視し、コントロールを初期化
+			ChangeWatcher.watch(npcData, "talk", function():void {
+				if (inTxtSelector == null) return;
+				resetText(inTxtSelector.selectedItem);
+			});
 		}
 		
 		/**
@@ -72,11 +77,6 @@ package views
 		 */
 		protected function inTxtSelectorChange(event:Event):void {
 			resetText(event.currentTarget.selectedItem);
-		}
-		
-		protected function reset(event:Event):void {
-			if (inTxtSelector == null) return;
-			resetText(inTxtSelector.selectedItem);
 		}
 		
 		protected function resetText(selectedItem:Object):void {
