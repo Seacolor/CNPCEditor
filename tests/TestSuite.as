@@ -1,5 +1,6 @@
 ﻿package  
 {
+	import suites.BasicFormatterTest;
 	import suites.BasicModelTest;
 	import suites.BasicParserTest;
 	
@@ -19,6 +20,10 @@
 		 * @private
 		 */
 		public var t2:BasicParserTest;
+		/**
+		 * @private
+		 */
+		public var t3:BasicFormatterTest;
 	}
 	
 }

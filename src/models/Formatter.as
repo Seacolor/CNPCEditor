@@ -26,7 +26,7 @@ package models
 			MainModel.TEXT.source.forEach(function(e:Object, index:int, array:Array):void {
 				if (txts[e.value] == undefined) return;
 				txt.push(e.value);
-				txt.push(txts[e.value]);
+				txt.push(txts[e.value].replace(/(?<!\r)\n/g, File.lineEnding));
 			});
 			
 			return txt.join(File.lineEnding);
