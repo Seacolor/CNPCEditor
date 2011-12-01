@@ -11,6 +11,9 @@
 		@namespace s "library://ns.adobe.com/flex/spark";
 		@namespace mx "library://ns.adobe.com/flex/mx";
 		@namespace view "*";
+		global {
+			fontSize: 16
+		}
         mx|Application {
             paddingTop: 5;
             paddingLeft: 5;
