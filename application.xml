@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <application xmlns="http://ns.adobe.com/air/application/3.0">
   <id>CNPCEditor</id>
-  <versionNumber>1.4</versionNumber>
+  <versionNumber>1.5.0</versionNumber>
   <filename>CNPCEditor</filename>
   <name>
     <text xml:lang="jp">CNPCエディタ</text>
