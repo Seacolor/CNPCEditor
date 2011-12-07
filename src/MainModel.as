@@ -444,6 +444,15 @@ package
 			{label: "何かが腹を破って飛び出した", value: "%txttobidasi,JP"},
 			{label: "エイリアンを溶かした", value: "%txttoketa,JP"},
 		]);
+		/**
+		 * 選択可能な役割です。
+		 */
+		public static const ROLE:ArrayCollection = new ArrayCollection([
+			{label: "通常", value: "0"},
+			{label: "吟遊詩人", value: "1"},
+			{label: "清掃員", value: "2"},
+			{label: "娼婦", value: "3"},
+		]);
 		
 		/**
 		 * 台詞における会話を示す定数です。
@@ -535,6 +544,10 @@ package
 		public var inBit30:CheckBox;
 		public var inBit31:CheckBox;
 		public var inTransmissivity:NumericStepper;
+		public var inDropShadowType:NumericStepper;
+		public var inCSetPos:NumericStepper;
+		public var inNoFoodOrDrink:RadioButtonGroup;
+		public var inCnpcRole:ComboBox;
 		/**
 		 * 耐性削除コントローラのクリックイベントハンドラです。
 		 * @param	clickEvent	イベントです。
@@ -738,6 +751,14 @@ package
 				npcData.bitOn.source = bitOn.split(',');
 				// 透過率
 				npcData.transmissivity = Parser.parseTransmissivity(fileContent);
+				// 影タイプ
+				npcData.dropShadowType = Parser.parseDropShadowType(fileContent);
+				// 地面からの浮き具合
+				npcData.cSetPos = Parser.parseCSetPos(fileContent);
+				// 自動飲食を禁止するかどうか
+				npcData.noFoodOrDrink = Parser.parseNoFoodOrDrink(fileContent);
+				// 吟遊詩人、清掃員、娼婦のいずれかとして行動するかどうか
+				npcData.cnpcRole = Parser.parseCnpcRole(fileContent);
 				// 会話イベント
 				var txtEvent:Object = fileContent.match(/%txt_ucnpc_ev_b\r?\n(.*?)\r?\n%txt_ucnpc_ev_e/ms);
 				npcData.txtEvent = null;
@@ -904,6 +925,14 @@ package
 			});
 			// 透過率をバインド
 			bindInput(inTransmissivity, "transmissivity");
+			// 影タイプ
+			bindInput(inDropShadowType, "dropShadowType");
+			// 地面からの浮き具合
+			bindInput(inCSetPos, "cSetPos");
+			// 自動飲食を禁止するかどうか
+			bindInput(inNoFoodOrDrink, "noFoodOrDrink");
+			// 吟遊詩人、清掃員、娼婦のいずれかとして行動するかどうか
+			bindInput(inCnpcRole, "cnpcRole");
 		}
 		
 		/**
@@ -990,7 +1019,7 @@ package
 				npcData.fixLv,
 				npcData.rare,
 				npcData.spawnType,
-				npcData.aiCalm,
+				npcData.cnpcRole == ROLE.getItemAt(0) ? npcData.aiCalm : "5",
 				npcData.aiMove,
 				npcData.aiDist,
 				npcData.aiHeal.value,
@@ -1001,6 +1030,10 @@ package
 				npcData.regist.source.join(','),
 				npcData.bitOn.source.join(','),
 				npcData.transmissivity,
+				npcData.dropShadowType,
+				npcData.cSetPos,
+				npcData.noFoodOrDrink,
+				npcData.cnpcRole.value,
 				Formatter.formatTxt(npcData.talk, npcData.txtTalkOrder, npcData.txtEvent)
 			), "shift_jis");
 			stream.close();

@@ -22,6 +22,10 @@ meleeElem.	"57,10"
 resist.		"57,10,52,-2"
 bitOn.		""
 transmissivity.		"100"
+dropShadowType.		"40"
+cSetPos.		"24"
+noFoodOrDrink.	"1"
+cnpcRole.	"3"
 
 %txtCalm,JP
 「オハヨオーハヨー♪」

@@ -138,6 +138,22 @@ package models
 		 */
 		public var transmissivity:Number = 0;
 		/**
+		 * 影タイプです。
+		 */
+		public var dropShadowType:Number = 0;
+		/**
+		 * 地面からの浮き具合です。
+		 */
+		public var cSetPos:Number = 16;
+		/**
+		 * 自動飲食を禁止するかどうかです。
+		 */
+		public var noFoodOrDrink:String = "0";
+		/**
+		 * 吟遊詩人、清掃員、娼婦のいずれかとして行動するかどうかです。
+		 */
+		public var cnpcRole:Object = MainModel.ROLE.getItemAt(0);
+		/**
 		 * 会話イベントの台詞です。
 		 */
 		public var txtEvent:String;

@@ -22,6 +22,10 @@ meleeElem.	"{27},{28}"
 resist.		"{29}"
 bitOn.		"{30}"
 transmissivity.	"{31}"
+dropShadowType.	"{32}"
+cSetPos.	"{33}"
+noFoodOrDrink.	"{34}"
+cnpcRole.	"{35}"
 
-{32}
+{36}
 %endTxt

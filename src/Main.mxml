@@ -27,6 +27,7 @@
 		<s:RadioButtonGroup id="inFixLv" selectedValue="{npcData.fixLv}" />
 		<s:RadioButtonGroup id="inSpawnType" selectedValue="{npcData.spawnType}" />
 		<s:RadioButtonGroup id="inAiCalm" selectedValue="{npcData.aiCalm}" />
+		<s:RadioButtonGroup id="inNoFoodOrDrink" selectedValue="{npcData.noFoodOrDrink}" />
 	</fx:Declarations>
 	
 	<model:states>
@@ -226,6 +227,19 @@
                     <s:FormItem label="透過率">
 						<s:NumericStepper id="inTransmissivity" value="{npcData.transmissivity}" stepSize="10" allowValueWrap="false" snapInterval="1" maximum="256" minimum="0" />
                     </s:FormItem>
+                    <s:FormItem label="影タイプ">
+						<s:NumericStepper id="inDropShadowType" value="{npcData.dropShadowType}" stepSize="1" allowValueWrap="false" snapInterval="1" maximum="150" minimum="-1" />
+                    </s:FormItem>
+                    <s:FormItem label="地面からの浮き具合">
+						<s:NumericStepper id="inCSetPos" value="{npcData.cSetPos}" stepSize="1" allowValueWrap="false" snapInterval="1" maximum="32" minimum="16" />
+                    </s:FormItem>
+					<s:FormItem label="自動飲食">
+						 <s:RadioButton groupName="inNoFoodOrDrink" id="inYes" label="禁止しない" value="0" />
+						 <s:RadioButton groupName="inNoFoodOrDrink" id="inNo" label="禁止する" value="1" />
+					</s:FormItem>
+					<s:FormItem label="役">
+						<s:ComboBox id="inCnpcRole" dataProvider="{ROLE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.cnpcRole}" />
+					</s:FormItem>
                 </s:Form>
                 <view:TalkForm id="inTalkForm" defaultButton="{inWrite}" includeIn="talk" width="100%" preinitialize="{inTalkForm.npcData = npcData}" />
             </view:CustomScrollGroup>
