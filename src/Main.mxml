@@ -51,7 +51,7 @@
 		<s:HGroup x="0" y="50" width="100%" height="100%">
 			<s:VScrollBar viewport="{inMainContainer}" height="100%"/>
             <view:CustomScrollGroup id="inMainContainer" width="100%" height="100%" clipAndEnableScrolling="true">
-                <s:Form defaultButton="{inWrite}" includeIn="default">
+                <s:Form defaultButton="{inWrite}" visible.default="true" visible.talk="false">
                     <s:FormHeading label="性能" />
                     <s:FormItem label="作者" required="true">
                         <s:TextInput id="inAuthor" text="{npcData.author}" />
@@ -241,7 +241,7 @@
 						<s:ComboBox id="inCnpcRole" dataProvider="{ROLE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.cnpcRole}" />
 					</s:FormItem>
                 </s:Form>
-                <view:TalkForm id="inTalkForm" defaultButton="{inWrite}" includeIn="talk" width="100%" preinitialize="{inTalkForm.npcData = npcData}" />
+                <view:TalkForm id="inTalkForm" defaultButton="{inWrite}" visible.default="false" visible.talk="true" width="100%" preinitialize="{inTalkForm.npcData = npcData}" />
             </view:CustomScrollGroup>
 		</s:HGroup>
     </s:Panel>

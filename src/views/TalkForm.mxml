@@ -12,7 +12,7 @@
 	<s:FormHeading label="台詞" />
 	<s:FormItem>
 		<s:HGroup width="100%">
-			<s:ComboBox id="inTxtSelector" dataProvider="{MainModel.TEXT}" labelToItemFunction="{inputToValue}" change="inTxtSelectorChange(event)" width="100%" />
+			<s:ComboBox id="inTxtSelector" dataProvider="{MainModel.TEXT}" labelToItemFunction="{inputToValue}" change="inTxtSelectorChange(event)" width="100%" selectedIndex="0" />
 			<s:CheckBox id="inTxtTalkOrder" label="順番に表示する" visible="false" selected="{npcData.txtTalkOrder}" />
 		</s:HGroup>
 		<s:BorderContainer id="inTxtControlBar" height="42" width="100%" backgroundColor="0xE8E8E8">

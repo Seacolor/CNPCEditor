@@ -443,6 +443,7 @@ package
 			{label: "寄生されている時（デフォルトだと「なにかが産まれそうだよ！」の部分）", value: "%txtumare,JP"},
 			{label: "何かが腹を破って飛び出した", value: "%txttobidasi,JP"},
 			{label: "エイリアンを溶かした", value: "%txttoketa,JP"},
+			{label: "PCの演奏に合わせて歌っているとき", value: "%txtsing,JP"},
 		]);
 		/**
 		 * 選択可能な役割です。
