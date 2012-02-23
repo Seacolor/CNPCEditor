@@ -26,6 +26,8 @@ dropShadowType.	"{32}"
 cSetPos.	"{33}"
 noFoodOrDrink.	"{34}"
 cnpcRole.	"{35}"
+raceAlias.	"{36}"
+classAlias.	"{37}"
 
-{36}
+{38}
 %endTxt

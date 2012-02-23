@@ -70,7 +70,31 @@ package models
 		public static function parseCnpcRole(str:String):Object {
 			var result:Array = str.match(/cnpcRole\.\s+"(.*?)"/);
 			if (!result) return MainModel.ROLE.getItemAt(0);
-			return MainModel.ROLE.getItemAt(itemSearch(MainModel.ROLE.source, result[1]));;
+			return MainModel.ROLE.getItemAt(itemSearch(MainModel.ROLE.source, result[1]));
+		}
+		
+		/**
+		 * 文字列から種族の別名の設定を抽出します。
+		 * <p>このメソッドは種族の別名の設定が存在しなかった場合、エラーではなく空文字列を返却します。</p>
+		 * @param	str	ファイルから読み込んだ文字列
+		 * @return	種族の別名
+		 */
+		public static function parseRaceAlias(str:String):String {
+			var result:Array = str.match(/raceAlias\.\s+"(.*?)"/);
+			if (!result) return "";
+			return String(result[1]);
+		}
+		
+		/**
+		 * 文字列から職業の別名の設定を抽出します。
+		 * <p>このメソッドは職業の別名の設定が存在しなかった場合、エラーではなく空文字列を返却します。</p>
+		 * @param	str	ファイルから読み込んだ文字列
+		 * @return	職業の別名
+		 */
+		public static function parseClassAlias(str:String):String {
+			var result:Array = str.match(/classAlias\.\s+"(.*?)"/);
+			if (!result) return "";
+			return String(result[1]);
 		}
 		
 		/**

@@ -65,9 +65,15 @@
                     <s:FormItem label="種族" required="true">
 						<s:ComboBox id="inRace"  dataProvider="{RACE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.race}" />
 					</s:FormItem>
+					<s:FormItem label="種族の別名">
+						<s:TextInput id="inRaceAlias" text="{npcData.raceAlias}" />
+					</s:FormItem>
                     <s:FormItem label="職業" required="true">
 						<s:ComboBox id="inClass"  dataProvider="{CLASS}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.npcClass}" />
                     </s:FormItem>
+					<s:FormItem label="職業の別名">
+						<s:TextInput id="inClassAlias" text="{npcData.classAlias}" />
+					</s:FormItem>
                     <s:FormItem id="inFilter" label="属性">
 						<s:CheckBox id="inNogenerate" label="自然生成しない"/>
 						<s:CheckBox id="inNodownload" label="ダウンロード対象にしない(召喚石の召喚候補から除外されます)"/>

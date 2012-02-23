@@ -154,6 +154,14 @@ package models
 		 */
 		public var cnpcRole:Object = MainModel.ROLE.getItemAt(0);
 		/**
+		 * 種族の別名です。
+		 */
+		public var raceAlias:String;
+		/**
+		 * 職業の別名です。
+		 */
+		public var classAlias:String;
+		/**
 		 * 会話イベントの台詞です。
 		 */
 		public var txtEvent:String;

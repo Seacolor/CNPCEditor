@@ -549,6 +549,8 @@ package
 		public var inCSetPos:NumericStepper;
 		public var inNoFoodOrDrink:RadioButtonGroup;
 		public var inCnpcRole:ComboBox;
+		public var inRaceAlias:TextInput;
+		public var inClassAlias:TextInput;
 		/**
 		 * 耐性削除コントローラのクリックイベントハンドラです。
 		 * @param	clickEvent	イベントです。
@@ -760,6 +762,10 @@ package
 				npcData.noFoodOrDrink = Parser.parseNoFoodOrDrink(fileContent);
 				// 吟遊詩人、清掃員、娼婦のいずれかとして行動するかどうか
 				npcData.cnpcRole = Parser.parseCnpcRole(fileContent);
+				// 種族の別名
+				npcData.raceAlias = Parser.parseRaceAlias(fileContent);
+				// 職業の別名
+				npcData.classAlias = Parser.parseClassAlias(fileContent);
 				// 会話イベント
 				var txtEvent:Object = fileContent.match(/%txt_ucnpc_ev_b\r?\n(.*?)\r?\n%txt_ucnpc_ev_e/ms);
 				npcData.txtEvent = null;
@@ -934,6 +940,10 @@ package
 			bindInput(inNoFoodOrDrink, "noFoodOrDrink");
 			// 吟遊詩人、清掃員、娼婦のいずれかとして行動するかどうか
 			bindInput(inCnpcRole, "cnpcRole");
+			// 種族の別名
+			bindInput(inRaceAlias, "raceAlias");
+			// 職業の別名
+			bindInput(inClassAlias, "classAlias");
 		}
 		
 		/**
@@ -1035,6 +1045,8 @@ package
 				npcData.cSetPos,
 				npcData.noFoodOrDrink,
 				npcData.cnpcRole.value,
+				npcData.raceAlias,
+				npcData.classAlias,
 				Formatter.formatTxt(npcData.talk, npcData.txtTalkOrder, npcData.txtEvent)
 			), "shift_jis");
 			stream.close();
