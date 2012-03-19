@@ -6,6 +6,7 @@ package views
 	import mx.controls.ColorPicker;
 	import mx.events.DropdownEvent;
 	import mx.events.FlexEvent;
+	import mx.utils.StringUtil;
 	import spark.components.BorderContainer;
 	import spark.components.CheckBox;
 	import spark.components.ComboBox;
@@ -30,6 +31,7 @@ package views
 		public var inTxtTalkOrder:CheckBox;
 		public var inTxtColorPicker:ColorPicker;
 		public var inTxtControlBar:BorderContainer;
+		public var inCastSelector:ComboBox;
 		
 		[Bindable]
 		/**
@@ -64,7 +66,7 @@ package views
 			// npcData.talk を監視し、コントロールを初期化
 			ChangeWatcher.watch(npcData, "talk", function():void {
 				if (inTxtSelector == null) return;
-				resetText(inTxtSelector.selectedItem);
+				resetText();
 			});
 		}
 		/**
@@ -72,28 +74,39 @@ package views
 		 * @param	changeEvent	イベントです。
 		 */
 		protected function onTxtChange(changeEvent:TextOperationEvent = null):void {
-			if (inTxtSelector.selectedIndex == -1) return;
-			npcData.talk[inTxtSelector.selectedItem.value] = inTxt.text;
+			var selectedKey:String = getSelectedKey();
+			if (selectedKey == "") return;
+			npcData.talk[selectedKey] = inTxt.text;
 		}
 		/**
 		 * 台詞選択コントロールの変更イベントハンドラです。
 		 * @param	event	イベントです。
 		 */
 		protected function inTxtSelectorChange(event:Event):void {
-			resetText(event.currentTarget.selectedItem);
+			// [会話時、台詞を順番に表示するか否か]のコントロールは会話の時のみ表示
+			inTxtTalkOrder.visible = inTxtSelector.selectedItem == MainModel.TEXT.getItemAt(5);
+			// 魔法選択コントロールは詠唱の時のみ表示
+			inCastSelector.visible = inTxtSelector.selectedItem == MainModel.TEXT.getItemAt(69);
+			resetText();
+		}
+		/**
+		 * 魔法選択コントロールの変更イベントハンドラです。
+		 * @param	event	イベントです。
+		 */
+		protected function inCastSelectorChange(event:Event):void {
+			resetText();
 		}
 		/**
 		 * 選択された台詞で台詞入力コントロールを初期化します。
 		 * @param	selectedItem	選択された台詞
 		 */
-		protected function resetText(selectedItem:Object):void {
-			// [会話時、台詞を順番に表示するか否か]のコントロールは会話の時のみ表示
-			inTxtTalkOrder.visible = selectedItem == MainModel.TEXT.getItemAt(5);
-			if (selectedItem == null || npcData.talk[selectedItem.value] == undefined) {
+		protected function resetText():void {
+			var selectedKey:String = getSelectedKey();
+			if (selectedKey == "" || npcData.talk[selectedKey] == undefined) {
 				editingText = "";
 				inTxt.text = editingText;
 			} else {
-				editingText = npcData.talk[selectedItem.value];
+				editingText = npcData.talk[selectedKey];
 			}
 		}
 		/**
@@ -116,6 +129,19 @@ package views
 			onTxtChange();
 		}
 		
+		/**
+		 * 現在編集中の台詞のキーを返します。
+		 * @return	今どの台詞が選択されているかを示す文字列です。
+		 */
+		protected function getSelectedKey():String {
+			if (inTxtSelector.selectedItem == null) return "";
+			var selectedKey:String = inTxtSelector.selectedItem.value;
+			if ( inTxtSelector.selectedItem == MainModel.TEXT.getItemAt(69) ) {
+				if (inCastSelector.selectedItem == null) return "";
+				selectedKey = StringUtil.substitute(selectedKey, inCastSelector.selectedItem.value);
+			}
+			return selectedKey;
+		}
 	}
 
 }

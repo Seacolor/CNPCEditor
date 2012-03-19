@@ -1,6 +1,7 @@
 package models 
 {
 	import flash.filesystem.File;
+	import mx.utils.StringUtil;
 	/**
 	 * ...
 	 * @author Seacolor
@@ -27,6 +28,13 @@ package models
 				if (txts[e.value] == undefined) return;
 				txt.push(e.value);
 				txt.push(txts[e.value].replace(/(?<!\r)\n/g, File.lineEnding));
+			});
+			var castKey:String = MainModel.TEXT.getItemAt(69).value;
+			MainModel.CAST.source.forEach(function(e:Object, index:int, array:Array):void {
+				var spellCastKey:String = StringUtil.substitute(castKey, e.value);
+				if (txts[spellCastKey] == undefined) return;
+				txt.push(spellCastKey);
+				txt.push(txts[spellCastKey].replace(/(?<!\r)\n/g, File.lineEnding));
 			});
 			
 			return txt.join(File.lineEnding);

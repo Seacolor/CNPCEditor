@@ -163,14 +163,9 @@ package
 			{label: "馬", value: "horse"},
 		]);
 		/**
-		 * 選択可能な行動です。
+		 * 選択可能な魔法です。
 		 */
-		public static const ACTION:ArrayCollection = new ArrayCollection([
-			{label: "何もしない", value: "0"},
-			{label: "近接攻撃", value: "-1"},
-			{label: "遠隔攻撃", value: "-2"},
-			{label: "接近待ち", value: "-3"},
-			{label: "ランダムな方向に移動", value: "-4"},
+		public static const CAST:ArrayCollection = new ArrayCollection([
 			{label: "軽傷治癒", value: "400"},
 			{label: "致命傷治癒", value: "401"},
 			{label: "エリスの癒し", value: "402"},
@@ -235,6 +230,17 @@ package
 			{label: "四次元ポケット", value: "463"},
 			{label: "メテオ", value: "465"},
 			{label: "グラビティ", value: "466"},
+		]);
+		/**
+		 * 選択可能な行動です。
+		 */
+		public static const ACTION:ArrayCollection = new ArrayCollection([
+			{label: "何もしない", value: "0"},
+			{label: "近接攻撃", value: "-1"},
+			{label: "遠隔攻撃", value: "-2"},
+			{label: "接近待ち", value: "-3"},
+			{label: "ランダムな方向に移動", value: "-4"},
+		].concat(CAST.toArray().concat([
 			{label: "吸血の牙(1)", value: "601"},
 			{label: "炎のブレス(6)", value: "602"},
 			{label: "冷気のブレス(6)", value: "603"},
@@ -293,7 +299,7 @@ package
 			{label: "鼓舞", value: "656"},
 			{label: "首狩り(2)", value: "658"},
 			{label: "地雷投下", value: "659"},
-		]);
+		])));
 		/**
 		 * 選択可能な特殊行動です。
 		 */
@@ -444,6 +450,7 @@ package
 			{label: "何かが腹を破って飛び出した", value: "%txttobidasi,JP"},
 			{label: "エイリアンを溶かした", value: "%txttoketa,JP"},
 			{label: "PCの演奏に合わせて歌っているとき", value: "%txtsing,JP"},
+			{label: "魔法を唱えたとき", value: "%txtcast{0},JP"},
 		]);
 		/**
 		 * 選択可能な役割です。
