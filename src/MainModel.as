@@ -456,11 +456,6 @@ package
 		]);
 		
 		/**
-		 * 台詞における会話を示す定数です。
-		 */
-		public static const TXT_DIALOG:Object = TEXT.getItemAt(5);
-		
-		/**
 		 * NPCの設定ファイルです。
 		 */
 		public var npcFile:File;

@@ -71,7 +71,7 @@ package views
 		 * 台詞入力コントロールの変更イベントハンドラです。
 		 * @param	changeEvent	イベントです。
 		 */
-		protected function onTxtChange(changeEvent:TextOperationEvent = null) {
+		protected function onTxtChange(changeEvent:TextOperationEvent = null):void {
 			if (inTxtSelector.selectedIndex == -1) return;
 			npcData.talk[inTxtSelector.selectedItem.value] = inTxt.text;
 		}
@@ -88,7 +88,7 @@ package views
 		 */
 		protected function resetText(selectedItem:Object):void {
 			// [会話時、台詞を順番に表示するか否か]のコントロールは会話の時のみ表示
-			inTxtTalkOrder.visible = selectedItem == MainModel.TXT_DIALOG;
+			inTxtTalkOrder.visible = selectedItem == MainModel.TEXT.getItemAt(5);
 			if (selectedItem == null || npcData.talk[selectedItem.value] == undefined) {
 				editingText = "";
 				inTxt.text = editingText;
