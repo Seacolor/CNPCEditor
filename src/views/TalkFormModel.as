@@ -60,17 +60,21 @@ package views
 				npcData.txtTalkOrder = changeEvent.currentTarget.selected;
 			});
 			// 台詞をバインド(複数の入力コントロールが関わるのでここだけ個別に定義)
-			inTxt.addEventListener(TextOperationEvent.CHANGE, function(changeEvent:TextOperationEvent):void {
-				if (inTxtSelector.selectedIndex == -1) return;
-				npcData.talk[inTxtSelector.selectedItem.value] = changeEvent.currentTarget.text;
-			});
+			inTxt.addEventListener(TextOperationEvent.CHANGE, onTxtChange);
 			// npcData.talk を監視し、コントロールを初期化
 			ChangeWatcher.watch(npcData, "talk", function():void {
 				if (inTxtSelector == null) return;
 				resetText(inTxtSelector.selectedItem);
 			});
 		}
-		
+		/**
+		 * 台詞入力コントロールの変更イベントハンドラです。
+		 * @param	changeEvent	イベントです。
+		 */
+		protected function onTxtChange(changeEvent:TextOperationEvent = null) {
+			if (inTxtSelector.selectedIndex == -1) return;
+			npcData.talk[inTxtSelector.selectedItem.value] = inTxt.text;
+		}
 		/**
 		 * 台詞選択コントロールの変更イベントハンドラです。
 		 * @param	event	イベントです。
@@ -78,7 +82,10 @@ package views
 		protected function inTxtSelectorChange(event:Event):void {
 			resetText(event.currentTarget.selectedItem);
 		}
-		
+		/**
+		 * 選択された台詞で台詞入力コントロールを初期化します。
+		 * @param	selectedItem	選択された台詞
+		 */
 		protected function resetText(selectedItem:Object):void {
 			// [会話時、台詞を順番に表示するか否か]のコントロールは会話の時のみ表示
 			inTxtTalkOrder.visible = selectedItem == MainModel.TXT_DIALOG;
@@ -89,7 +96,10 @@ package views
 				editingText = npcData.talk[selectedItem.value];
 			}
 		}
-		
+		/**
+		 * 台詞色コントロールの閉じるイベントハンドラです。
+		 * @param	closeEvent	イベントです。
+		 */
 		protected function inTxtColorPickerClose(closeEvent:DropdownEvent):void {
 			if (inTxt.selectionActivePosition == -1 || inTxt.selectionAnchorPosition == -1) return;
 			// 選択された色を16進数表現で取得
@@ -100,8 +110,10 @@ package views
 			}
 			// 10進数のRGB表現に変換
 			var color:String = "[" + parseInt(selectedColor.substring(0, 2), 16).toString() + "," + parseInt(selectedColor.substring(2, 4), 16).toString() + "," + parseInt(selectedColor.substring(4, 6), 16).toString() + "]";
+			var txt:String = inTxt.text;
 			// 色定義に変換(指定位置の文字列を変換している為、文字列置換は使わない)
-			inTxt.text = inTxt.text.substring(0, inTxt.selectionActivePosition) + "|" + color + inTxt.text.substring(inTxt.selectionActivePosition, inTxt.selectionAnchorPosition) + "|" + inTxt.text.substring(inTxt.selectionAnchorPosition);
+			inTxt.text = txt.substring(0, inTxt.selectionActivePosition) + "|" + color + txt.substring(inTxt.selectionActivePosition, inTxt.selectionAnchorPosition) + "|" + txt.substring(inTxt.selectionAnchorPosition);
+			onTxtChange();
 		}
 		
 	}
