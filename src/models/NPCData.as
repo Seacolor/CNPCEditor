@@ -172,7 +172,15 @@ package models
 		/**
 		 * 台詞です。
 		 */
-		public var talk:Object = {};
+		public var talk:Object = { };
+		/**
+		 * カスタム種族を利用するか否かです。
+		 */
+		public var customRace:Boolean = false;
+		/**
+		 * カスタム種族の定義です。
+		 */
+		public var raceData:RaceData = new RaceData();
 	}
 
 }

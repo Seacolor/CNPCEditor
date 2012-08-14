@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view:RaceFormModel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+               xmlns:s="library://ns.adobe.com/flex/spark" 
+               xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:view="views.*"
+			   creationComplete="binding(event)">
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:FormHeading label="種族" />
+	<s:FormItem label="名前" required="true">
+		<s:TextInput id="inName" text="{npcData.raceData.name}" />
+	</s:FormItem>
+	<s:FormItem label="ID" required="true">
+		<s:TextInput id="inId" text="{npcData.raceData.name}" restrict="a-zA-Z0-9_ " />
+	</s:FormItem>
+	<s:FormItem label="性別" required="true">
+		<s:HSlider id="inSex" minimum="0" maximum="100" value="{npcData.raceData.sex}" stepSize="5" showDataTip="false" />
+		<s:HGroup>
+			<s:Label text="女性"/>
+			<s:Label text=":"/>
+			<s:Label text="{100 - inSex.value}%"/>
+		</s:HGroup>
+		<s:HGroup>
+			<s:Label text="男性"/>
+			<s:Label text=":"/>
+			<s:Label text="{inSex.value}%"/>
+		</s:HGroup>
+	</s:FormItem>
+	<s:FormItem label="DV">
+		<s:NumericStepper id="inDv" value="{npcData.raceData.dv}" stepSize="1" allowValueWrap="false" maximum="1000" minimum="0" />
+		<s:helpContent>
+			<s:VGroup>
+				<s:Label text="コウモリは320"/>
+				<s:Label text="クイックリングは550"/>
+			</s:VGroup>
+		</s:helpContent>
+	</s:FormItem>
+	<s:FormItem label="PV">
+		<s:NumericStepper id="inPv" value="{npcData.raceData.pv}" stepSize="1" allowValueWrap="false" maximum="1000" minimum="0" />
+		<s:helpContent>
+			<s:VGroup>
+				<s:Label text="やどかりは340"/>
+				<s:Label text="メタルは1000"/>
+			</s:VGroup>
+		</s:helpContent>
+	</s:FormItem>
+	<s:FormItem label="HP" required="true">
+		<s:NumericStepper id="inHp" value="{npcData.raceData.hp}" stepSize="1" allowValueWrap="false" maximum="1000" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="MP" required="true">
+		<s:NumericStepper id="inMp" value="{npcData.raceData.mp}" stepSize="1" allowValueWrap="false" maximum="1000" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="筋力" required="true">
+		<s:NumericStepper id="inStr" value="{npcData.raceData.str}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="耐久" required="true">
+		<s:NumericStepper id="inEnd" value="{npcData.raceData.end}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="器用" required="true">
+		<s:NumericStepper id="inDex" value="{npcData.raceData.dex}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="感覚" required="true">
+		<s:NumericStepper id="inPer" value="{npcData.raceData.per}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="習得" required="true">
+		<s:NumericStepper id="inLer" value="{npcData.raceData.ler}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="意思" required="true">
+		<s:NumericStepper id="inWil" value="{npcData.raceData.wil}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="魔力" required="true">
+		<s:NumericStepper id="inMag" value="{npcData.raceData.mag}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="魅力" required="true">
+		<s:NumericStepper id="inChr" value="{npcData.raceData.chr}" stepSize="1" allowValueWrap="false" maximum="50" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="速度" required="true">
+		<s:NumericStepper id="inSpd" value="{npcData.raceData.spd}" stepSize="1" allowValueWrap="false" maximum="1000" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="格闘スタイル">
+		<s:ComboBox id="inMeleeStyle" dataProvider="{MELEE_STYLE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.raceData.meleeStyle}" />
+	</s:FormItem>
+	<s:FormItem label="詠唱スタイル">
+		<s:ComboBox id="inCastStyle" dataProvider="{CAST_STYLE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.raceData.castStyle}" />
+	</s:FormItem>
+	<s:FormItem label="耐性タイプ">
+		<s:ComboBox id="inResist" dataProvider="{REGIST_TYPE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.raceData.resist}" />
+	</s:FormItem>
+	<s:FormItem label="年齢加算乱数値" required="true">
+		<s:NumericStepper id="inAgeRnd" value="{npcData.raceData.ageRnd}" stepSize="1" allowValueWrap="false" maximum="999999" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="最低年齢" required="true">
+		<s:NumericStepper id="inAge" value="{npcData.raceData.age}" stepSize="1" allowValueWrap="false" maximum="999999" minimum="1" />
+	</s:FormItem>
+	<s:FormItem label="血飛沫のタイプ">
+		<s:ComboBox id="inBlood" dataProvider="{BLOOD_TYPE}" labelToItemFunction="{inputToValue}" selectedItem="{npcData.raceData.blood}" />
+	</s:FormItem>
+	<s:FormItem label="繁殖力">
+		<s:NumericStepper id="inBreeder" value="{npcData.raceData.breeder}" stepSize="1" allowValueWrap="false" maximum="1000" minimum="0" />
+	</s:FormItem>
+	<s:FormItem label="身長">
+		<s:NumericStepper id="inHeight" value="{npcData.raceData.height}" stepSize="1" allowValueWrap="false" maximum="9999" minimum="0" />
+	</s:FormItem>
+	<s:FormItem label="獲得技能">
+		<s:HGroup>
+			<s:Label text="スキル"/>
+			<s:ComboBox id="inSkillId" dataProvider="{SKILL}" labelToItemFunction="{inputToValue}" />
+			<s:Label text="ボーナス"/>
+			<s:NumericStepper id="inSkillBonus" stepSize="1" allowValueWrap="false" maximum="10" minimum="1" />
+			<s:Button id="inSkillAdd" label="追加" click="inSkillAddClick(event)" />
+		</s:HGroup>
+		<s:List id="inSkill" dataProvider="{npcData.raceData.skill}" width="200">
+			<s:itemRenderer>
+				<fx:Component>
+					<s:ItemRenderer>
+						<s:Button id="inSkillDelete" skinClass="skins.CloseButtonSkin" width="24" height="16" click="outerDocument.inSkillDeleteClick(event)" />
+						<s:Label x="25" text="{data.id.label + '(' + data.bonus + ')'}" />
+					</s:ItemRenderer>
+				</fx:Component>
+			</s:itemRenderer>
+		</s:List>
+	</s:FormItem>
+</view:RaceFormModel>
