@@ -181,6 +181,14 @@ package models
 		 * カスタム種族の定義です。
 		 */
 		public var raceData:RaceData = new RaceData();
+		/**
+		 * カスタム種族の定義です。
+		 */
+		public var userRace:String = "";
+		/**
+		 * カスタム職業の定義です。
+		 */
+		public var userClass:String = "";
 	}
 
 }

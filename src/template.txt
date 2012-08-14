@@ -28,6 +28,8 @@ noFoodOrDrink.	"{34}"
 cnpcRole.	"{35}"
 raceAlias.	"{36}"
 classAlias.	"{37}"
+userRace.	"{38}"
+userClass.	"{39}"
 
-{38}
+{40}
 %endTxt

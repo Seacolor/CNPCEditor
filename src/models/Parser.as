@@ -126,6 +126,30 @@ package models
 			
 			return txts;
 		}
+		
+		/**
+		 * 文字列からカスタム種族の定義の設定を抽出します。
+		 * <p>このメソッドはカスタム種族の定義の設定が存在しなかった場合、エラーではなく空文字列を返却します。</p>
+		 * @param	str	ファイルから読み込んだ文字列
+		 * @return	カスタム種族の定義
+		 */
+		public static function parseUserRace(str:String):String {
+			var result:Array = str.match(/userRace\.\s+"(.*?)"/);
+			if (!result) return "";
+			return String(result[1]);
+		}
+		
+		/**
+		 * 文字列からカスタム職業の定義の設定を抽出します。
+		 * <p>このメソッドはカスタム職業の定義の設定が存在しなかった場合、エラーではなく空文字列を返却します。</p>
+		 * @param	str	ファイルから読み込んだ文字列
+		 * @return	カスタム職業の定義
+		 */
+		public static function parseUserClass(str:String):String {
+			var result:Array = str.match(/userClass\.\s+"(.*?)"/);
+			if (!result) return "";
+			return String(result[1]);
+		}
 	}
 
 }

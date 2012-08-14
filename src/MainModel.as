@@ -772,6 +772,10 @@ package
 				npcData.raceAlias = Parser.parseRaceAlias(fileContent);
 				// 職業の別名
 				npcData.classAlias = Parser.parseClassAlias(fileContent);
+				// カスタム種族
+				npcData.userRace = Parser.parseUserRace(fileContent);
+				// カスタム職業
+				npcData.userClass = Parser.parseUserClass(fileContent);
 				// 会話イベント
 				var txtEvent:Object = fileContent.match(/%txt_ucnpc_ev_b\r?\n(.*?)\r?\n%txt_ucnpc_ev_e/ms);
 				npcData.txtEvent = null;
@@ -1055,6 +1059,8 @@ package
 				npcData.cnpcRole.value,
 				npcData.raceAlias,
 				npcData.classAlias,
+				npcData.userRace,
+				npcData.userClass,
 				Formatter.formatTxt(npcData.talk, npcData.txtTalkOrder, npcData.txtEvent)
 			), "shift_jis");
 			stream.close();
