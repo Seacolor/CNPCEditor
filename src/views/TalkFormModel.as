@@ -1,8 +1,10 @@
 package views 
 {
+	import enum.Character;
 	import flash.events.Event;
 	import models.NPCData;
 	import mx.binding.utils.ChangeWatcher;
+	import mx.collections.ArrayCollection;
 	import mx.controls.ColorPicker;
 	import mx.events.DropdownEvent;
 	import mx.events.FlexEvent;
@@ -20,6 +22,11 @@ package views
 	 */
 	public class TalkFormModel extends Form 
 	{
+		/**
+		 * 選択可能な血飛沫のタイプです。
+		 */
+		protected const CHARACTER:ArrayCollection = new ArrayCollection(Character.toArray());
+		
 		[Bindable]
 		/**
 		 * NPCの設定です。
@@ -32,6 +39,7 @@ package views
 		public var inTxtColorPicker:ColorPicker;
 		public var inTxtControlBar:BorderContainer;
 		public var inCastSelector:ComboBox;
+		public var inCharacterSelector:ComboBox;
 		
 		[Bindable]
 		/**
@@ -85,8 +93,17 @@ package views
 		protected function inTxtSelectorChange(event:Event):void {
 			// [会話時、台詞を順番に表示するか否か]のコントロールは会話の時のみ表示
 			inTxtTalkOrder.visible = inTxtSelector.selectedItem == MainModel.TEXT.getItemAt(5);
-			// 魔法選択コントロールは詠唱の時のみ表示
-			inCastSelector.visible = inTxtSelector.selectedItem == MainModel.TEXT.getItemAt(69);
+			switch (inTxtSelector.selectedItem) {
+				// 魔法選択コントロールは詠唱の時のみ表示
+				case MainModel.TEXT.getItemAt(69):
+					currentState = "cast";
+					break
+				case MainModel.TEXT.getItemAt(70):
+					currentState = "pornobook";
+					break
+				default:
+					currentState = "default";
+			}
 			resetText();
 		}
 		/**
@@ -140,7 +157,19 @@ package views
 				if (inCastSelector.selectedItem == null) return "";
 				selectedKey = StringUtil.substitute(selectedKey, inCastSelector.selectedItem.value);
 			}
+			if ( inTxtSelector.selectedItem == MainModel.TEXT.getItemAt(70) ) {
+				if (inCharacterSelector.selectedItem == null) return "";
+				selectedKey = StringUtil.substitute(selectedKey, inCharacterSelector.selectedItem.value);
+			}
 			return selectedKey;
+		}
+		
+		/**
+		 * キャラクター選択コントロールの変更イベントハンドラです。
+		 * @param	event	イベントです。
+		 */
+		protected function inCharacterSelectorChange(event:Event):void {
+			resetText();
 		}
 	}
 

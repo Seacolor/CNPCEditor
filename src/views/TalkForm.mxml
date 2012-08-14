@@ -9,13 +9,20 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
+	<view:states>
+		<mx:State name="default" />
+		<mx:State name="cast"  />
+		<mx:State name="pornobook"  />
+	</view:states>
+	
 	<s:FormHeading label="台詞" />
 	<s:FormItem>
 		<s:HGroup width="100%">
 			<s:ComboBox id="inTxtSelector" dataProvider="{MainModel.TEXT}" labelToItemFunction="{inputToValue}" change="inTxtSelectorChange(event)" width="100%" selectedIndex="0" />
 			<s:CheckBox id="inTxtTalkOrder" label="順番に表示する" visible="false" selected="{npcData.txtTalkOrder}" />
 		</s:HGroup>
-		<s:ComboBox id="inCastSelector" dataProvider="{MainModel.CAST}" labelToItemFunction="{inputToValue}" change="inCastSelectorChange(event)" width="100%" visible="false" selectedIndex="0" />
+		<s:ComboBox id="inCastSelector" dataProvider="{MainModel.CAST}" labelToItemFunction="{inputToValue}" change="inCastSelectorChange(event)" width="100%" visible.default="false" visible.cast="true" visible.pornobook="false" selectedIndex="0" includeInLayout.default="false" includeInLayout.cast="true" includeInLayout.pornobook="false" />
+		<s:ComboBox id="inCharacterSelector" dataProvider="{CHARACTER}" labelToItemFunction="{inputToValue}" change="inCharacterSelectorChange(event)" width="100%" visible.default="false" visible.cast="false" visible.pornobook="true" selectedIndex="0" includeInLayout.default="false" includeInLayout.cast="false" includeInLayout.pornobook="true" />
 		<s:BorderContainer id="inTxtControlBar" height="42" width="100%" backgroundColor="0xE8E8E8">
 			<s:layout>
 				<s:HorizontalLayout verticalAlign="middle" paddingTop="10" paddingBottom="10" paddingLeft="10" paddingRight="10" />

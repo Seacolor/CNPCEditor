@@ -1,5 +1,6 @@
 package models 
 {
+	import enum.Character;
 	import flash.filesystem.File;
 	import mx.utils.StringUtil;
 	/**
@@ -35,6 +36,13 @@ package models
 				if (txts[spellCastKey] == undefined) return;
 				txt.push(spellCastKey);
 				txt.push(txts[spellCastKey].replace(/(?<!\r)\n/g, File.lineEnding));
+			});
+			var pornobookKey:String = MainModel.TEXT.getItemAt(70).value;
+			Character.toArray().forEach(function(e:Object, index:int, array:Array):void {
+				var characterPornobookKey:String = StringUtil.substitute(pornobookKey, e.value);
+				if (txts[characterPornobookKey] == undefined) return;
+				txt.push(characterPornobookKey);
+				txt.push(txts[characterPornobookKey].replace(/(?<!\r)\n/g, File.lineEnding));
 			});
 			
 			return txt.join(File.lineEnding);

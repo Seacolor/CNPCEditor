@@ -451,6 +451,8 @@ package
 			{label: "エイリアンを溶かした", value: "%txttoketa,JP"},
 			{label: "PCの演奏に合わせて歌っているとき", value: "%txtsing,JP"},
 			{label: "魔法を唱えたとき", value: "%txtcast{0},JP"},
+			{label: "PCがエロ本を読んでいるとき", value: "%txtpornobook{0},JP"},
+			{label: "PCがエロ本を読んでいるとき（キャラ番号の指定なしの場合）", value: "%txtpornobookdefault,JP"},
 		]);
 		/**
 		 * 選択可能な役割です。
