@@ -553,6 +553,8 @@ package
 		public var inCnpcRole:ComboBox;
 		public var inRaceAlias:TextInput;
 		public var inClassAlias:TextInput;
+		public var inNogenerate:CheckBox;
+		public var inNodownload:CheckBox;
 		/**
 		 * 耐性削除コントローラのクリックイベントハンドラです。
 		 * @param	clickEvent	イベントです。
@@ -825,6 +827,8 @@ package
 			// 職業をバインド
 			bindInput(inClass, "npcClass");
 			// 属性をバインド
+			bindInput(inNogenerate, "filter");
+			bindInput(inNodownload, "filter");
 			bindInput(inMan, "filter");
 			bindInput(inDragon, "filter");
 			bindInput(inUndead, "filter");
